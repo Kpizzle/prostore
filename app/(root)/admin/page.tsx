@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import { APP_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `Admin`,
