@@ -31,6 +31,8 @@ export const config: NextAuthConfig = {
 					}
 				})
 
+				console.log('located user:', user)
+
 				if (user && user.password) {
 					const isMatch = compareSync(credentials.password as string, user.password)
 
