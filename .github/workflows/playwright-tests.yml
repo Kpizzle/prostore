@@ -41,6 +41,13 @@ jobs:
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
+      - name: Run Application 
+        run: npm run dev
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+
       - name: Run Playwright tests
         run: npx playwright test
         env:
