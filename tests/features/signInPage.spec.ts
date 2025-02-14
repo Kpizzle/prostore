@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { SignInPage } from '../pageObjectModels/signInPage';
 
-test.describe('Login Page Functional Tests', () => {
+test.describe('Login Page Functional Tests', {tag: '@features'}, () => {
   test.beforeEach(async ({ page }) => {
     const signInPage = new SignInPage(page);
     await signInPage.goto();
@@ -36,5 +36,14 @@ test.describe('Login Page Functional Tests', () => {
 
 			const validationMessage = await signInPage.getValidationMessage(signInPage.emailInput)
 			expect(validationMessage).toContain('Please fill out this field.')
+		})
+		test('Validation error displayed when using an invalid email address', async ({page}) => {
+			const signInPage = new SignInPage(page)
+			await signInPage.fillEmailField('email')
+			await signInPage.emailInput.press('Enter')
+			
+
+			const validationMessage = await signInPage.getValidationMessage(signInPage.emailInput)
+			expect(validationMessage).toContain('Please include an \'@\' in the email address. \'email\' is missing an \'@\'')
 		})
 });
