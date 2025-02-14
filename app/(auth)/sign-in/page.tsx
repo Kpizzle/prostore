@@ -12,13 +12,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
+import { JSX } from 'react';
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: 'Sign In',
 };
 
-const SignInPage = async () => {
-  const session = await auth();
+const SignInPage = async (): Promise<JSX.Element | null> => {
+	const session = await auth();
 
   if (session) {
     return redirect('/');
