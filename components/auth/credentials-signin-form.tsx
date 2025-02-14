@@ -14,13 +14,12 @@ const CredentialsSignInForm = () => {
     message: '',
   });
 
-		
-
   const SignInButton = () => {
     const { pending } = useFormStatus();
 
     return (
       <Button
+						data-testid='signInButton'
         disabled={pending}
         className='w-full'
         variant='default'>
@@ -35,6 +34,7 @@ const CredentialsSignInForm = () => {
         <div>
           <Label htmlFor='email'>Email</Label>
           <Input
+            data-testid='emailInput'
             id='email'
             name='email'
             type='email'
@@ -46,6 +46,7 @@ const CredentialsSignInForm = () => {
         <div>
           <Label htmlFor='password'>Password</Label>
           <Input
+										data-testid='passwordInput'
             id='password'
             name='password'
             type='password'
@@ -65,7 +66,9 @@ const CredentialsSignInForm = () => {
           </Link>
         </div>
         {data && !data.success && (
-          <div className='text-center text-destructive'>{data.message}</div>
+          <div
+										data-testid='invalidCredentialsText'
+										 className='text-center text-destructive'>{data.message}</div>
         )}
       </div>
     </form>
