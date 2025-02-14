@@ -32,19 +32,16 @@ jobs:
           restore-keys: |
             playwright-browsers-
 
-      - name: Debug baseURL from secrets
-        run: echo "baseURL is ${{ secrets.BASE_URL }}"  # Console log the baseURL value
-
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      # - name: Start the local dev server
-      #   run: npm run dev &  # Start the server in the background
-
-      # - name: Wait for the server to be ready
-      #   run: npx wait-on http://127.0.0.1:3000' # Wait until the app is ready
+      - name: Create .env file
+        run: |
+          echo "BASE_URL=${{ secrets.BASE_URL }}" > .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
 
       - name: Run Playwright tests
         run: npx playwright test
-        # env:
-        #  BASE_URL: ${{secrets.BASE_URL}}
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
