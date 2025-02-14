@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import UserButton from './user-button'
+import UserButton from './user-button';
 
 const Menu = () => {
   return (
@@ -16,13 +16,14 @@ const Menu = () => {
       <nav className='hidden md:flex w-full max-w-xs gap-1'>
         <ModeToggle />
         <Button
+          data-testid='shoppingCartButton'
           asChild
           variant='ghost'>
           <Link href='/cart'>
             <ShoppingCart /> Cart
           </Link>
         </Button>
-<UserButton />
+        <UserButton />
       </nav>
       <nav className='md:hidden'>
         <Sheet>
@@ -39,7 +40,7 @@ const Menu = () => {
                 <ShoppingCart /> Cart
               </Link>
             </Button>
-          <UserButton/>
+            <UserButton />
           </SheetContent>
         </Sheet>
       </nav>
