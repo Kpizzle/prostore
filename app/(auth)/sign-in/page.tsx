@@ -18,11 +18,16 @@ export const metadata: Metadata = {
   title: 'Sign In',
 };
 
-const SignInPage = async (): Promise<JSX.Element | null> => {
+const SignInPage = async (props: {
+	searchParams: Promise<{
+		callbackUrl: string
+	}>
+}): Promise<JSX.Element | null> => {
+	const {callbackUrl} = await props.searchParams;
 	const session = await auth();
 
   if (session) {
-    return redirect('/');
+    return redirect(callbackUrl || '/');
   }
 
   return (

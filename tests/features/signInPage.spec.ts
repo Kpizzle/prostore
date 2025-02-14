@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { SignInPage } from '../pageObjectModels/signInPage';
 
-test.describe('Login Page Functional Tests', {tag: '@features'}, () => {
+test.describe('Login Page Functional Tests', {tag: ['@features', '@smoke'],}, () => {
   test.beforeEach(async ({ page }) => {
     const signInPage = new SignInPage(page);
     await signInPage.goto();
