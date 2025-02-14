@@ -33,7 +33,7 @@ jobs:
             playwright-browsers-
 
       - name: Debug baseURL from secrets
-        run: echo "baseURL is ${{ secrets.NEXT_PUBLIC_SERVER_URL }}"  # Console log the baseURL value
+        run: echo "baseURL is ${{ secrets.BASE_URL }}"  # Console log the baseURL value
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
