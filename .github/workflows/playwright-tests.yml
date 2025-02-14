@@ -1,50 +1,50 @@
-# name: Playwright Tests
+name: Playwright Tests
 
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 18
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-#       - name: Install dependencies
-#         run: npm install
+      - name: Install dependencies
+        run: npm install
 
-#       - name: Cache Playwright browsers
-#         uses: actions/cache@v4
-#         with:
-#           path: ~/.cache/ms-playwright
-#           key: playwright-browsers-${{ hashFiles('**/package-lock.json') }}
-#           restore-keys: |
-#             playwright-browsers-
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            playwright-browsers-
 
-#       - name: Debug baseURL from secrets
-#         run: echo "baseURL is ${{ secrets.BASE_URL }}"  # Console log the baseURL value
+      - name: Debug baseURL from secrets
+        run: echo "baseURL is ${{ secrets.BASE_URL }}"  # Console log the baseURL value
 
-#       - name: Install Playwright browsers
-#         run: npx playwright install --with-deps
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
-#       - name: Start the local dev server
-#         run: npm run dev &  # Start the server in the background
+      # - name: Start the local dev server
+      #   run: npm run dev &  # Start the server in the background
 
-#       - name: Wait for the server to be ready
-#         run: npx wait-on http://localhost:3000  # Wait until the app is ready
+      # - name: Wait for the server to be ready
+      #   run: npx wait-on http://127.0.0.1:3000' # Wait until the app is ready
 
-#       - name: Run Playwright tests
-#         run: npx playwright test
-#         env:
-#          BASE_URL: ${{secrets.BASE_URL}}
+      - name: Run Playwright tests
+        run: npx playwright test
+        # env:
+        #  BASE_URL: ${{secrets.BASE_URL}}
