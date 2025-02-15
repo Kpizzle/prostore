@@ -23,7 +23,7 @@ const SignUpForm = () => {
 
     return (
       <Button
-						  data-testid='signInButton'
+						  data-testid='signUpButton'
         disabled={pending}
         className='w-full'
         variant='default'>
