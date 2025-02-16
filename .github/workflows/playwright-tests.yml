@@ -13,8 +13,7 @@ permissions:
   contents: read
   pages: write
   actions: read
-  deployments: write  # Needed for deploy-pages
-
+  deployments: write  # Added permission for deploy-pages
 
 jobs:
   test:
@@ -56,19 +55,25 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
+      - name: Check Playwright Report Existence
+        run: ls -la playwright-report
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
 
       - name: Upload Playwright Report
-        if: always() # Ensure report is uploaded even if tests fail
+        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
-          name: playwright-report
-          path: playwright-report # Upload the entire report directory
-          retention-days: 7 # Optional: Keep the report for 7 days
+          name: playwright-report  # Ensure artifact name is correct
+          path: playwright-report
+          retention-days: 7
+
+      - name: List Artifacts Before Deploying
+        run: ls -la
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
         with:
-         artifact_name: playwright-report
+          artifact_name: playwright-report  # Ensure correct artifact is used
