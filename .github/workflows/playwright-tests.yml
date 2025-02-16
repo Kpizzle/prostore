@@ -48,8 +48,8 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
-      - name: Setup Github pages
-        uses: actions/configure-pages@v3
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5.0.0
 								
       - name: Upload Playwright Report
         if: always()  # Ensure report is uploaded even if tests fail
