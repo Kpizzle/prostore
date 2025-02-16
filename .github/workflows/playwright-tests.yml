@@ -9,8 +9,11 @@ on:
       - master
 
 permissions:
- id-token: write
- contents: read
+  id-token: write
+  contents: read
+  pages: write
+  actions: read
+  deployments: write  # Needed for deploy-pages
 
 
 jobs:
@@ -67,3 +70,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        with:
+         artifact_name: playwright-report
