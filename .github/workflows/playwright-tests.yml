@@ -64,8 +64,8 @@ jobs:
         if: always()
         uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages
-          path: playwright-report/index.html
+          name: index.html
+          path: playwright-report
           retention-days: 7
 
       - name: Deploy to GitHub Pages
