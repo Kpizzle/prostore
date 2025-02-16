@@ -50,18 +50,15 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
-								
+
       - name: Upload Playwright Report
-        if: always()  # Ensure report is uploaded even if tests fail
+        if: always() # Ensure report is uploaded even if tests fail
         uses: actions/upload-pages-artifact@v1
         with:
           name: playwright-report
-          path: playwright-report  # Upload the entire report directory
-          retention-days: 7  # Optional: Keep the report for 7 days
+          path: playwright-report # Upload the entire report directory
+          retention-days: 7 # Optional: Keep the report for 7 days
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-						
-
-	
