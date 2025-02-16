@@ -11,9 +11,6 @@ on:
 permissions:
   id-token: write
   contents: read
-  pages: write
-  actions: read
-  deployments: write  # Added permission for deploy-pages
 
 jobs:
   test:
@@ -55,8 +52,8 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
-      - name: Check Playwright Report Existence
-        run: ls -la playwright-report
+      - name: Debug Playwright Report Contents
+        run: ls -R playwright-report
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
@@ -65,15 +62,17 @@ jobs:
         if: always()
         uses: actions/upload-pages-artifact@v3
         with:
-          name: playwright-report  # Ensure artifact name is correct
+          name: github-pages  # Changed to default name for compatibility
           path: playwright-report
           retention-days: 7
 
-      - name: List Artifacts Before Deploying
-        run: ls -la
+      - name: List Artifacts in GitHub Actions
+        run: |
+          echo "Checking uploaded artifacts..."
+          gh run list --limit 10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-        with:
-          artifact_name: playwright-report  # Ensure correct artifact is used
