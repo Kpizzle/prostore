@@ -9,17 +9,17 @@ const sampleData = {
 			role: 'admin'
 		},
 		{
-			name: 'Henry',
-			email: 'henry@test.com',
-			password: hashSync('henry', 10),
+			name: 'John',
+			email: 'john.doe@example.com',
+			password: hashSync('SecurePass123!', 10),
 			role: 'admin'
 		},
 		{
-			name: 'James',
-			email: 'user@test.com',
-			password: hashSync('user', 10),
+			name: 'Michael',
+			email: 'michael.carter@example.com',
+			password: hashSync('SecurePass123!', 10),
 			role: 'user'
-		}
+		},
 	],
   products: [
     {

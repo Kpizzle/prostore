@@ -3,6 +3,7 @@ import { type Locator, type Page } from '@playwright/test';
 export class SignUpPage {
 
 	private readonly page: Page
+	public readonly nameInput: Locator
 	public readonly emailInput: Locator
 	public readonly passwordInput: Locator
 	public readonly ConfirmPasswordInput: Locator
@@ -11,6 +12,7 @@ export class SignUpPage {
 
 	constructor(page: Page) {
 		this.page = page;
+		this.nameInput = page.getByTestId('nameInput')
 		this.emailInput = page.getByTestId('emailInput')
 		this.passwordInput = page.getByTestId('passwordInput')
 		this.ConfirmPasswordInput = page.getByTestId('confirmPasswordInput')
@@ -22,7 +24,11 @@ export class SignUpPage {
 	//Functions to complete on the loginPage
 
 	async goto() {
-		await this.page.goto('/sign-in')
+		await this.page.goto('/sign-up')
+	}
+
+	async fillNameField(name: string){
+		await this.nameInput.fill(name)
 	}
 
 	async fillEmailField(email: string){
@@ -35,7 +41,7 @@ export class SignUpPage {
 	
 	}
 	async fillconfirmPasswordField(password: string){
-		await this.passwordInput.fill(password)
+		await this.ConfirmPasswordInput.fill(password)
 	}
 
 
@@ -43,9 +49,11 @@ export class SignUpPage {
 		await this.signUpButton.click()
 	}
 
-	async completeSignInProcess(email: string, password: string) {
+	async completeSignUpProcess(name: string,email: string, password: string) {
+		await this.fillNameField(name)
 		await this.fillEmailField(email)
 		await this.fillPasswordField(password)
+		await this.fillconfirmPasswordField(password)
 		await this.submitLogin()
 	}
 
