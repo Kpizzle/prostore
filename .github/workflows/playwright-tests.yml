@@ -73,6 +73,35 @@ jobs:
           keep_files: true
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
+
+      - name: Generate index.html for reports
+        run: |
+          REPORTS_DIR="reports"
+          INDEX_FILE="$REPORTS_DIR/index.html"
+
+          # Create reports directory if it doesn't exist
+          mkdir -p $REPORTS_DIR
+
+          # Start the HTML file
+          echo "<!DOCTYPE html>
+          <html>
+          <head>
+            <title>Playwright Test Reports</title>
+            <meta charset='UTF-8'>
+          </head>
+          <body>
+          <h1>Playwright Test Reports</h1>
+          <ul>" > $INDEX_FILE
+
+          # List all report folders and add links
+          for report in $(ls -d $REPORTS_DIR/*/ | sort -r); do
+            report_name=$(basename $report)
+            echo "<li><a href='reports/$report_name/index.html'>$report_name</a></li>" >> $INDEX_FILE
+          done
+
+          # Close the HTML file
+          echo "</ul></body></html>" >> $INDEX_FILE
+
       - name: Copy latest report to a "latest" directory
         run: |
           cp -r playwright-report $GITHUB_WORKSPACE/latest-report
