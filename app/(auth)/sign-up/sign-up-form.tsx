@@ -43,7 +43,7 @@ const SignUpForm = () => {
             id='name'
             name='name'
             type='text'
-            required
+            // required
             autoComplete='name'
             defaultValue={signUpDefaultValues.name}
           />
@@ -54,8 +54,8 @@ const SignUpForm = () => {
             data-testid='emailInput'
             id='email'
             name='email'
-            type='email'
-            required
+            type='input'
+            // required
             autoComplete='email'
             defaultValue={signUpDefaultValues.email}
           />
