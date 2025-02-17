@@ -61,7 +61,7 @@ jobs:
         uses: actions/configure-pages@v5.0.0
 
       - name: Generate timestamp for versioning
-       run: echo "REPORT_VERSION=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+        run: echo "REPORT_VERSION=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Publish HTML report
         if: always() # We want this to always run, even if test fail prior to this step running
@@ -73,6 +73,7 @@ jobs:
           keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
           user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
           user_email: 'github-actions[bot]@users.noreply.github.com'
+										
       - name: Copy latest report to "latest" directory
         run: |
           cp -r playwright-report $GITHUB_WORKSPACE/latest-report
