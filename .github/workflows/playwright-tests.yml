@@ -55,7 +55,7 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
       - name: List files
-        run: ls 
+        run: ls
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
@@ -64,15 +64,16 @@ jobs:
         run: echo "REPORT_VERSION=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Publish HTML report
-        if: always() # We want this to always run, even if test fail prior to this step running
+        if: always()
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GH_PAT }}
-          publish_dir: playwright-report # This is where index.html will be output
+          publish_dir: playwright-report
           destination_dir: reports/${{ env.REPORT_VERSION }}
-          keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-          user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+          keep_files: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+
       - name: Copy latest report to "latest" directory
         run: |
           cp -r playwright-report $GITHUB_WORKSPACE/latest-report
