@@ -73,7 +73,3 @@ jobs:
           keep_files: true
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-
-      - name: Copy latest report to a "latest" directory
-        run: |
-          cp -r playwright-report $GITHUB_WORKSPACE/latest-report
