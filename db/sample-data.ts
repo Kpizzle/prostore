@@ -9,13 +9,13 @@ const sampleData = {
 			role: 'admin'
 		},
 		{
-			name: 'John',
+			name: 'John Doe-test',
 			email: 'john.doe@example.com',
 			password: hashSync('SecurePass123!', 10),
 			role: 'admin'
 		},
 		{
-			name: 'Michael',
+			name: 'Michael Carter-test',
 			email: 'michael.carter@example.com',
 			password: hashSync('SecurePass123!', 10),
 			role: 'user'

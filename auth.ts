@@ -3,6 +3,9 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from './db/prisma';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compareSync } from 'bcrypt-ts-edge';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
+import clsx from 'clsx';
 
 export const config: NextAuthConfig = {
   pages: {
@@ -56,8 +59,8 @@ export const config: NextAuthConfig = {
     async session({ session, user, trigger, token }: any) {
       //set the user id from the token
       session.user.id = token.sub;
-						session.user.role = token.role;
-						session.user.name = token.name;
+      session.user.role = token.role;
+      session.user.name = token.name;
 
       //if there is an update, set the user name
       if (trigger === 'update') {
@@ -65,7 +68,7 @@ export const config: NextAuthConfig = {
       }
       return session;
     },
-    async jwt({ token, user}: any) {
+    async jwt({ token, user }: any) {
       //assign user fields to token
 
       if (user) {
@@ -76,13 +79,35 @@ export const config: NextAuthConfig = {
           token.email = user.email!.split('@')[0];
 
           //update db to reflect token name
-										await prisma.user.update({
-											where: {id: user.id},
-											data: { name: token.name}
-										})
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { name: token.name },
+          });
         }
       }
-						return token;
+      return token;
+    },
+    authorized({ request, auth }: any) {
+      //Check for session cart cookie
+      if (!request.cookies.get('sessionCartId')) {
+        //Generate new session cart id cookie
+        const sessionCartId = crypto.randomUUID();
+
+        //clone request headers
+        const newRequestHeaders = new Headers(request.headers);
+
+        //create new response
+        const response = NextResponse.next({
+          request: {
+            headers: newRequestHeaders,
+          },
+        });
+        //set new generated session cart id in the response cookies
+        response.cookies.set('sessionCartId', sessionCartId);
+        return response;
+      } else {
+        return true;
+      }
     },
   },
 };
