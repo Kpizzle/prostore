@@ -22,6 +22,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+         distribution: zulu
+         java-version: 17
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -55,17 +61,28 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
       - name: List files
-        run: ls 
+        run: ls
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5.0.0
-
-      - name: Publish HTML report
-        if: always() # We want this to always run, even if test fail prior to this step running
-        uses: peaceiris/actions-gh-pages@v3.7.3
+      - name: Load test report history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
         with:
-          github_token: ${{ secrets.GH_PAT }}
-          publish_dir: playwright-report # This is where index.html will be output
-          keep_files: true # Set this to true to make sure we don't wipe out the other content in GitHub Pages
-          user_name: 'github-actions[bot]' # This will be the username that gets stamped in the repo commit
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: build/allure-results
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history

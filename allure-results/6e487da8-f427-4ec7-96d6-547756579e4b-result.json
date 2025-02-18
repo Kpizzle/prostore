@@ -1,0 +1,227 @@
+{
+	"uuid": "6e487da8-f427-4ec7-96d6-547756579e4b",
+	"name": "Validation error displayed when submitting only a password",
+	"historyId": "aca26b7f77636e340520b00a7656827e:5bd835b0d6b1d4ada3b9f0db936e82c8",
+	"status": "passed",
+	"statusDetails": {},
+	"stage": "finished",
+	"steps": [
+		{
+			"status": "passed",
+			"statusDetails": {},
+			"stage": "finished",
+			"steps": [
+				{
+					"status": "passed",
+					"statusDetails": {},
+					"stage": "finished",
+					"steps": [
+						{
+							"status": "passed",
+							"statusDetails": {},
+							"stage": "finished",
+							"steps": [
+								{
+									"status": "passed",
+									"statusDetails": {},
+									"stage": "finished",
+									"steps": [],
+									"attachments": [],
+									"parameters": [],
+									"name": "browser.newContext",
+									"start": 1739919662314,
+									"stop": 1739919662317
+								}
+							],
+							"attachments": [],
+							"parameters": [],
+							"name": "fixture: context",
+							"start": 1739919662313,
+							"stop": 1739919662318
+						},
+						{
+							"status": "passed",
+							"statusDetails": {},
+							"stage": "finished",
+							"steps": [
+								{
+									"status": "passed",
+									"statusDetails": {},
+									"stage": "finished",
+									"steps": [],
+									"attachments": [],
+									"parameters": [],
+									"name": "browserContext.newPage",
+									"start": 1739919662321,
+									"stop": 1739919662394
+								}
+							],
+							"attachments": [],
+							"parameters": [],
+							"name": "fixture: page",
+							"start": 1739919662319,
+							"stop": 1739919662394
+						},
+						{
+							"status": "passed",
+							"statusDetails": {},
+							"stage": "finished",
+							"steps": [],
+							"attachments": [],
+							"parameters": [],
+							"name": "page.goto(/sign-in)",
+							"start": 1739919662396,
+							"stop": 1739919662917
+						}
+					],
+					"attachments": [],
+					"parameters": [],
+					"name": "beforeEach hook",
+					"start": 1739919662311,
+					"stop": 1739919662917
+				}
+			],
+			"attachments": [],
+			"parameters": [],
+			"name": "Before Hooks",
+			"start": 1739919662311,
+			"stop": 1739919662917
+		},
+		{
+			"status": "passed",
+			"statusDetails": {},
+			"stage": "finished",
+			"steps": [],
+			"attachments": [],
+			"parameters": [],
+			"start": 1739919662918,
+			"name": "locator.getByTestId('passwordInput').fill",
+			"stop": 1739919663087
+		},
+		{
+			"status": "passed",
+			"statusDetails": {},
+			"stage": "finished",
+			"steps": [],
+			"attachments": [],
+			"parameters": [],
+			"start": 1739919663088,
+			"name": "locator.getByTestId('signInButton').click",
+			"stop": 1739919663121
+		},
+		{
+			"status": "passed",
+			"statusDetails": {},
+			"stage": "finished",
+			"steps": [],
+			"attachments": [],
+			"parameters": [],
+			"start": 1739919663123,
+			"name": "locator.getByTestId('emailInput').evaluate",
+			"stop": 1739919663144
+		},
+		{
+			"status": "passed",
+			"statusDetails": {},
+			"stage": "finished",
+			"steps": [],
+			"attachments": [],
+			"parameters": [],
+			"start": 1739919663145,
+			"name": "expect.toContain",
+			"stop": 1739919663145
+		},
+		{
+			"status": "passed",
+			"statusDetails": {},
+			"stage": "finished",
+			"steps": [
+				{
+					"status": "passed",
+					"statusDetails": {},
+					"stage": "finished",
+					"steps": [],
+					"attachments": [],
+					"parameters": [],
+					"name": "fixture: page",
+					"start": 1739919663146,
+					"stop": 1739919663146
+				},
+				{
+					"status": "passed",
+					"statusDetails": {},
+					"stage": "finished",
+					"steps": [],
+					"attachments": [],
+					"parameters": [],
+					"name": "fixture: context",
+					"start": 1739919663146,
+					"stop": 1739919663146
+				}
+			],
+			"attachments": [],
+			"parameters": [],
+			"name": "After Hooks",
+			"start": 1739919663145,
+			"stop": 1739919663245
+		}
+	],
+	"attachments": [],
+	"parameters": [
+		{
+			"name": "Project",
+			"value": "chromium"
+		}
+	],
+	"labels": [
+		{
+			"name": "language",
+			"value": "javascript"
+		},
+		{
+			"name": "framework",
+			"value": "playwright"
+		},
+		{
+			"name": "package",
+			"value": "features.signInPage.spec.ts"
+		},
+		{
+			"name": "titlePath",
+			"value": " > chromium > features/signInPage.spec.ts > Login Page Functional Tests"
+		},
+		{
+			"name": "tag",
+			"value": "features"
+		},
+		{
+			"name": "tag",
+			"value": "smoke"
+		},
+		{
+			"name": "host",
+			"value": "iV0621.local"
+		},
+		{
+			"name": "thread",
+			"value": "pid-43097-worker-0"
+		},
+		{
+			"name": "parentSuite",
+			"value": "chromium"
+		},
+		{
+			"name": "suite",
+			"value": "features/signInPage.spec.ts"
+		},
+		{
+			"name": "subSuite",
+			"value": "Login Page Functional Tests"
+		}
+	],
+	"links": [],
+	"start": 1739919662315,
+	"testCaseId": "aca26b7f77636e340520b00a7656827e",
+	"fullName": "features/signInPage.spec.ts:44:9",
+	"stop": 1739919663245
+}
