@@ -53,7 +53,7 @@ jobs:
             playwright-browsers-
 
       - name: Install Playwright browsers
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install --with-deps
 
       - name: Ensure Allure results directory exists
         run: mkdir -p allure-results
@@ -88,22 +88,22 @@ jobs:
           restore-keys: |
             allure-results-
 
-      - name: Load test report history
+      - name: Load existing test report history
         uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: allure-history
-          fetch-depth: 1  # Fetch only latest report history
+          fetch-depth: 1  # Fetch only the latest report history
 
       - name: Ensure Allure history exists
         run: mkdir -p allure-history/latest
 
       - name: Clean old reports
-        run: rm -rf allure-history/latest/*
+        run: rm -rf allure-history/latest/*  # Ensures previous reports are deleted before publishing
 
-      - name: Build test report
+      - name: Build Allure test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
@@ -111,11 +111,14 @@ jobs:
           allure_history: allure-history/latest
           allure_results: allure-results
 
-      - name: Publish test report
+      - name: Add .nojekyll file
+        run: touch allure-history/latest/.nojekyll  # Ensures GitHub Pages serves all files correctly
+
+      - name: Publish test report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history/latest
-          keep_files: true  # Ensures history isn't deleted, but old reports are replaced
+          keep_files: true  # Ensures history remains but always updates /latest/
