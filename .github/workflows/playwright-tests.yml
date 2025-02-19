@@ -1,4 +1,4 @@
-name: Playwright Tests Version
+name: Playwright Tests Version 2
 
 on:
   push:
