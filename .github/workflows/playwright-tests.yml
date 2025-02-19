@@ -106,7 +106,7 @@ jobs:
       - name: Build Allure test report
         run: |
           mkdir -p allure-history/latest  # Ensure latest folder exists
-          npx allure generate allure-results --clean -o allure-history/latest
+          npx allure generate allure-results 
 
       - name: Add .nojekyll file
         run: touch allure-history/latest/.nojekyll  # Ensures GitHub Pages serves all files correctly
