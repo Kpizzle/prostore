@@ -1,4 +1,4 @@
-name: Playwright Tests Again
+name: Playwright Tests Version 4
 
 on:
   push:
@@ -104,21 +104,17 @@ jobs:
         run: rm -rf allure-history/latest/*  # Ensures previous reports are deleted before publishing
 
       - name: Build Allure test report
-        uses: simple-elf/allure-report-action@v1.7
-        if: always()
-        with:
-          gh_pages: gh-pages
-          allure_history: allure-history/latest
-          allure_results: allure-results
+        run: |
+          mkdir -p allure-history/latest  # Ensure latest folder exists
+          npx allure generate allure-results --clean -o allure-history/latest
 
       - name: Add .nojekyll file
         run: touch allure-history/latest/.nojekyll  # Ensures GitHub Pages serves all files correctly
 
-      - name: Publish test report to GitHub Pages
+      - name: Publish Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history/latest
-          keep_files: true  # Ensures history remains but always updates /latest/
+          publish_dir: allure-history
+          keep_files: false  # Ensures only "latest/" exists
